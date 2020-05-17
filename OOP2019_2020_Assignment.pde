@@ -38,7 +38,7 @@ void draw() {
   background(0);
   
   if(helpOn) {
-    text("Left Key: Cello (default)\nRight Key: Mandocello/guitar\nz: C2, a: G2, q: D3, 1: A3\nSpace Key: Show/hide help", width / 2, height / 2);
+    text("Left key: Cello (default)\nRight key: Mandocello/guitar\nZ key: C2\nA key: G2\nQ key: D3\n1 key: A3\nSpace Key: Hide help", width / 2, height / 2);
   }
 }
 
@@ -54,8 +54,21 @@ void keyPressed() {
   }
   
   // Press space key to display/hide help text
-  if(key == ' ' && helpOn) helpOn = false;
-  else helpOn = true;
+  if(key == ' ') {
+    helpOn = false;
+  }
+  
+  if((!pressed[midiNoteNo()]) && midiNoteNo() != 0) {
+    chan[0].noteOn(midiNoteNo(), 100);
+    
+    pressed[midiNoteNo()] = true;
+  }
+}
+
+void keyReleased() {
+  chan[0].noteOff(midiNoteNo(), 100);
+  
+  pressed[midiNoteNo()] = false;
 }
 
 // Method to return MIDI notes, e.g., 36 = C, 37 = C#
