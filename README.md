@@ -15,7 +15,7 @@ This program displays shapes and plays MIDI notes in response to keys pressed on
 The timbre of the notes and the shapes that appear on the screen depend on what "instrument" you are playing. You have two instrument choices: cello and mandocello. The default setting is set on cello. You can pick this instrument by pressing the left key. When the cello is picked, the MIDI notes that play will resemble that of a bowed string instrument. The shapes that appear are red bars that elongate horizontally but shrink vertically. The other instrument is the mandocello. You can pick this instrument by pressing the right key. When the mandocello is picked, the MIDI notes that play will resemble that of a plucked string instrument. The shapes that appear are blue, unfilled circles that grow in diameter so that they resemble ripples.
 
 # How it works
-To run the program, you will need to have the Processing IDE installed. Once you open the .pde file, you can click on the run button or press Ctrl+R to run the program. Alternatively, you can simply run the .exe file found in the zipped folder.
+To run the program, you will need to have the Processing IDE installed. Once you open the .pde file, you can click on the run button or press Ctrl+R to run the program.
 
 Since this program utilises MIDI, the javax.sound.midi package had to be imported. This lets the program get a synthesizer and use methods such as noteOn() and noteOff() which are essential to getting the computer to output sounds. The default MIDI synthesizer sound was a piano but this was changed to a cello sound through the MidiChannel method programChange(42). 42 represents the cello sound while 25 represents the mandocello (guitar) sound. The method midiNoteNo() returns an integer that represents a MIDI note value, e.g., 36 = C, 37 = C#, 38 = D. A switch statement was used to check for the key pressed by the user. The keys were chosen to represent their equivalent position on a fingerboard/fretboard of a cello/mandocello as explained earlier.
 
@@ -32,71 +32,9 @@ In order to display the red bars whenever you play a note, a bar class was neede
 - getting the bars and ripples to animate
 - turning a QWERTY keyboard into a virtual cello
 
-# Markdown Tutorial
+# Video Demonstration
+[![YouTube Video Demonstration](http://img.youtube.com/vi/6N4X5lsq9Nw/0.jpg)](http://www.youtube.com/watch?v=6N4X5lsq9Nw)
 
-This is *emphasis*
-
-This is a bulleted list
-
-- Item
-- Item
-
-This is a numbered list
-
-1. Item
-1. Item
-
-This is a [hyperlink](http://bryanduggan.org)
-
-# Headings
-## Headings
-#### Headings
-##### Headings
-
-This is code:
-
-```Java
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-So is this without specifying the language:
-
-```
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-This is an image using a relative URL:
-
-![An image](images/p8.png)
-
-This is an image using an absolute URL:
-
-![A different image](https://bryanduggandotorg.files.wordpress.com/2019/02/infinite-forms-00045.png?w=595&h=&zoom=2)
-
-This is a youtube video:
-
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
-
-This is a table:
-
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-
+## Music Used
+- Johann Sebastian Bach (1685 - 1750) - Cello Suite No. 4 in E-flat major: Bourrée II, BWV 1010
+- Kai Hansen - Land of the Free
