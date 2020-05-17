@@ -11,10 +11,61 @@ MidiChannel[] chan; // for playing sounds
 int pressedSize = 70;
 boolean[] pressed = new boolean[pressedSize]; // to check that a key has already been pressed
 boolean helpOn = true; // to display help text on screen
+int maxNumShapes = 20;
+boolean barOn = true; // default display
+Bar[] bars = new Bar[maxNumShapes]; // array to store bars that display on screen
+int currentBar = 0;
+
+class Bar {
+  float x, y, barW, barH;
+  boolean on;
+  
+  // Default constructor
+  Bar() {
+    x = 0;
+    y = 0;
+    barW = 0;
+    barH = 0;
+    on = false;
+  }
+  
+  // Method to initialise a bar's co-ordinates and size
+  void initB(float x, float y) {
+    this.x = x;
+    this.y = y;
+    barW = width * 0.05;
+    barH = height * 0.1;
+    on = true;
+  }
+  
+  // Method to animate the bar
+  void animB() {
+    if(on) {
+      // Bar grows in width, but shrinks in height
+      barH -= 0.4;
+      barW += 8;
+      
+      // If bar gets to a certain width, stop displaying it
+      if(barW > width * 2) on = false;
+    }
+  }
+  
+  // Method to display bar
+  void renderB() {
+    if(on) {
+      noFill();
+      strokeWeight(1);
+      stroke(0, 255, 255);
+      rect(x, y, barW, barH);
+    }
+  }
+}
 
 void setup() {
   size(500, 500);
   textAlign(CENTER, CENTER);
+  rectMode(CENTER);
+  colorMode(HSB);
   
   try {
     // Get a synthesizer
@@ -32,13 +83,25 @@ void setup() {
   for(int i = 0; i < pressedSize; i++) {
     pressed[i] = false;
   }
+  
+  // Create bar objects
+  for(int i = 0; i < bars.length; i++) {
+    bars[i] = new Bar();
+  }
 }
 
 void draw() {
   background(0);
   
+  // Display help text
   if(helpOn) {
     text("Left key: Cello (default)\nRight key: Mandocello/guitar\nZ key: C2\nA key: G2\nQ key: D3\n1 key: A3\nSpace Key: Hide help", width / 2, height / 2);
+  }
+  
+  // Display bars (in response to key presses)
+  for(int i = 0; i < bars.length; i++) {
+    bars[i].animB();
+    bars[i].renderB();
   }
 }
 
@@ -53,19 +116,29 @@ void keyPressed() {
     chan[0].programChange(25);
   }
   
-  // Press space key to display/hide help text
+  // Press space key to hide help text
   if(key == ' ') {
     helpOn = false;
   }
   
+  // Key needs to only be pressed once to play a note
   if((!pressed[midiNoteNo()]) && midiNoteNo() != 0) {
     chan[0].noteOn(midiNoteNo(), 100);
     
+    float x = width / 2;
+    float y = map(midiNoteNo(), 36, 66, height, 0);
+    bars[currentBar].initB(x, y);
+    currentBar++;
+    
     pressed[midiNoteNo()] = true;
   }
+  
+  // Reset the current bar to 0 to prevent an array out of bounds error
+  if(currentBar == bars.length) currentBar = 0;
 }
 
 void keyReleased() {
+  // Note stops playing when key is released
   chan[0].noteOff(midiNoteNo(), 100);
   
   pressed[midiNoteNo()] = false;
