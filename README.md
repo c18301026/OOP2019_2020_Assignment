@@ -4,13 +4,6 @@ Name: Rianlee Pineda
 
 Student Number: C18301026
 
-## Instructions
-- Fork this repository and use it a starter project for your assignment
-- Create a new package named your student number and put all your code in this package.
-- You should start by creating a subclass of ie.tudublin.Visual
-- There is an example visualiser called MyVisual in the example package
-- Check out the WaveForm and AudioBandsVisual for examples of how to call the Processing functions from other classes that are not subclasses of PApplet
-
 # Description of the assignment
 The goal of this Object-Oriented Programming assignment was to create "something beautiful to enjoy while listening to music". This Processing program creates visuals on the spot based on a musical performance by you on a typical QWERTY computer keyboard which is laid out to mimic the tuning of a violoncello (or cello).
 
