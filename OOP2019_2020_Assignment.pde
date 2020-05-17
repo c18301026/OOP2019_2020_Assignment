@@ -10,9 +10,11 @@ import javax.sound.midi.*;
 MidiChannel[] chan; // for playing sounds
 int pressedSize = 70;
 boolean[] pressed = new boolean[pressedSize]; // to check that a key has already been pressed
+boolean helpOn = true; // to display help text on screen
 
 void setup() {
   size(500, 500);
+  textAlign(CENTER, CENTER);
   
   try {
     // Get a synthesizer
@@ -34,6 +36,10 @@ void setup() {
 
 void draw() {
   background(0);
+  
+  if(helpOn) {
+    text("Left Key: Cello (default)\nRight Key: Mandocello/guitar\nz: C2, a: G2, q: D3, 1: A3\nSpace Key: Show/hide help", width / 2, height / 2);
+  }
 }
 
 void keyPressed() {
@@ -46,6 +52,10 @@ void keyPressed() {
   if(keyCode == RIGHT) {
     chan[0].programChange(25);
   }
+  
+  // Press space key to display/hide help text
+  if(key == ' ' && helpOn) helpOn = false;
+  else helpOn = true;
 }
 
 // Method to return MIDI notes, e.g., 36 = C, 37 = C#
