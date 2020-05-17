@@ -15,7 +15,7 @@ int maxNumShapes = 20;
 boolean barOn = true; // default display
 Bar[] bars = new Bar[maxNumShapes]; // array to store bars that display on screen
 int currentBar = 0;
-Ripple[] ripples = new Ripple[maxNumShapes];
+Ripple[] ripples = new Ripple[maxNumShapes]; // array to store ripples that display on screen
 int currentRipple = 0;
 
 class Bar {
@@ -75,7 +75,7 @@ class Ripple {
     on = false;
   }
   
-  // Method to initialise a ripple's co-ordinates and size
+  // Method to initialise a ripple's co-ordinates and diameter
   void initR(float x, float y) {
     this.x = x;
     this.y = y;
@@ -83,7 +83,7 @@ class Ripple {
     on = true;
   }
   
-  // Method to animate the bar
+  // Method to animate the ripple
   void animR() {
     if(on) {
       // Ripple grows in diameter
@@ -145,7 +145,7 @@ void draw() {
   // Display help text
   if(helpOn) {
     fill(255);
-    text("Left key: Cello (default)\nRight key: Mandocello/guitar\nZ key: C2\nA key: G2\nQ key: D3\n1 key: A3\nSpace Key: Hide help", width / 2, height / 2);
+    text("Left key: Cello (default)\nRight key: Mandocello/guitar\nDown key: Hide help\nZ key: C2\nA key: G2\nQ key: D3\n1 key: A3", width / 2, height / 2);
   }
   
   // Display bars (in response to key presses)
@@ -174,8 +174,8 @@ void keyPressed() {
     barOn = false;
   }
   
-  // Press space key to hide help text
-  if(key == ' ') {
+  // Hide help text
+  if(keyCode == DOWN) {
     helpOn = false;
   }
   
@@ -210,7 +210,7 @@ void keyReleased() {
   pressed[midiNoteNo()] = false;
 }
 
-// Method to return MIDI notes, e.g., 36 = C, 37 = C#
+// Method to return MIDI note values, e.g., 36 = C, 37 = C#, 38 = D
 int midiNoteNo() {
   // Cello layout for QWERTY keyboard
   switch(key) {
