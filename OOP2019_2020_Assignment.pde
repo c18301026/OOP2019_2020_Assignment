@@ -15,6 +15,8 @@ int maxNumShapes = 20;
 boolean barOn = true; // default display
 Bar[] bars = new Bar[maxNumShapes]; // array to store bars that display on screen
 int currentBar = 0;
+Ripple[] ripples = new Ripple[maxNumShapes];
+int currentRipple = 0;
 
 class Bar {
   float x, y, barW, barH;
@@ -53,10 +55,52 @@ class Bar {
   // Method to display bar
   void renderB() {
     if(on) {
-      noFill();
+      fill(0, 255, 255, 128);
       strokeWeight(1);
       stroke(0, 255, 255);
       rect(x, y, barW, barH);
+    }
+  }
+}
+
+class Ripple {
+  float x, y, diameter;
+  boolean on;
+  
+  // Default constructor
+  Ripple() {
+    x = 0;
+    y = 0;
+    diameter = 0;
+    on = false;
+  }
+  
+  // Method to initialise a ripple's co-ordinates and size
+  void initR(float x, float y) {
+    this.x = x;
+    this.y = y;
+    diameter = 0;
+    on = true;
+  }
+  
+  // Method to animate the bar
+  void animR() {
+    if(on) {
+      // Ripple grows in diameter
+      diameter += 5;
+      
+      // If ripple gets to a certain diameter, stop displaying it
+      if(diameter > height * 1.5) on = false;
+    }
+  }
+  
+  // Method to display ripple
+  void renderR() {
+    if(on) {
+      noFill();
+      strokeWeight(3);
+      stroke(150, 255, 255, 200);
+      circle(x, y, diameter);
     }
   }
 }
@@ -88,6 +132,11 @@ void setup() {
   for(int i = 0; i < bars.length; i++) {
     bars[i] = new Bar();
   }
+  
+  // Create ripple objects
+  for(int i = 0; i < ripples.length; i++) {
+    ripples[i] = new Ripple();
+  }
 }
 
 void draw() {
@@ -95,6 +144,7 @@ void draw() {
   
   // Display help text
   if(helpOn) {
+    fill(255);
     text("Left key: Cello (default)\nRight key: Mandocello/guitar\nZ key: C2\nA key: G2\nQ key: D3\n1 key: A3\nSpace Key: Hide help", width / 2, height / 2);
   }
   
@@ -103,17 +153,25 @@ void draw() {
     bars[i].animB();
     bars[i].renderB();
   }
+  
+  // Display ripples (in response to key presses)
+  for(int i = 0; i < ripples.length; i++) {
+    ripples[i].animR();
+    ripples[i].renderR();
+  }
 }
 
 void keyPressed() {
-  // Change instrument sound to cello
+  // Change instrument sound to cello and change render to bars
   if(keyCode == LEFT) {
     chan[0].programChange(42);
+    barOn = true;
   }
   
-  // Change instrument sound to mandocello/guitar
+  // Change instrument sound to mandocello/guitar and change render to ripples
   if(keyCode == RIGHT) {
     chan[0].programChange(25);
+    barOn = false;
   }
   
   // Press space key to hide help text
@@ -125,16 +183,24 @@ void keyPressed() {
   if((!pressed[midiNoteNo()]) && midiNoteNo() != 0) {
     chan[0].noteOn(midiNoteNo(), 100);
     
-    float x = width / 2;
-    float y = map(midiNoteNo(), 36, 66, height, 0);
-    bars[currentBar].initB(x, y);
-    currentBar++;
+    if(barOn) {
+      float x = width / 2;
+      float y = map(midiNoteNo(), 36, 66, height, 0);
+      bars[currentBar].initB(x, y);
+      currentBar++;
+    } else {
+      float x = map(midiNoteNo(), 36, 66, 0, width);
+      float y = height / 2;
+      ripples[currentRipple].initR(x, y);
+      currentRipple++;
+    }
     
     pressed[midiNoteNo()] = true;
   }
   
-  // Reset the current bar to 0 to prevent an array out of bounds error
+  // Reset the current bar and ripple to 0 to prevent an array out of bounds error
   if(currentBar == bars.length) currentBar = 0;
+  if(currentRipple == ripples.length) currentRipple = 0;
 }
 
 void keyReleased() {
