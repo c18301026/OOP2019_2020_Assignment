@@ -183,6 +183,7 @@ void keyPressed() {
   if((!pressed[midiNoteNo()]) && midiNoteNo() != 0) {
     chan[0].noteOn(midiNoteNo(), 100);
     
+    // Start the bar/ripple when a note plays
     if(barOn) {
       float x = width / 2;
       float y = map(midiNoteNo(), 36, 66, height, 0);
