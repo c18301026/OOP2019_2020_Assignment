@@ -33,8 +33,10 @@ In order to display the red bars whenever you play a note, a bar class was neede
 - turning a QWERTY keyboard into a virtual cello
 
 # Video Demonstration
-[![YouTube Video Demonstration](http://img.youtube.com/vi/6N4X5lsq9Nw/0.jpg)](http://www.youtube.com/watch?v=6N4X5lsq9Nw)
+[![YouTube Video Demonstration](http://img.youtube.com/vi/2awARrWVBFc/0.jpg)](http://www.youtube.com/watch?v=2awARrWVBFc)
 
 ## Music Used
-- Johann Sebastian Bach (1685 - 1750) - Cello Suite No. 4 in E-flat major: Bourrée II, BWV 1010
-- Kai Hansen - Land of the Free
+- Johann Sebastian Bach - Cello Suite No. 4 in E-flat major, BWV 1010: V. Bourrée II
+- Kai Hansen (Gamma Ray) - Land of the Free
+- Johann Sebastian Bach - Violin Partita No. 1 in B minor, BWV 1002: III. Sarabande
+- Patrice Guers - Tapping Ballad
