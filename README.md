@@ -1,11 +1,11 @@
 # Music Visualiser Project
 
-Name: Rianlee Pineda
+Name: Rianlee Gabriel Pineda
 
 Student Number: C18301026
 
 # Description of the assignment
-The goal of this Object-Oriented Programming assignment was to create "something beautiful to enjoy while listening to music". This Processing program creates visuals on the spot based on a musical performance by you on a typical QWERTY computer keyboard which is laid out to mimic the tuning of a violoncello (or cello).
+The goal of this OOP assignment was to create "something beautiful to enjoy while listening to music". This program was made in Processing, a software sketchbook based on Java. It creates visuals on the spot based on a musical performance by the user on a typical QWERTY computer keyboard which has been laid out to mimic the fingerboard of a cello.
 
 # Instructions
 When you start the program, the first thing you see is some white text on a black background. The white text simply shows help information. You may hide this text by pressing the down key. The keyboard that triggers the visuals is isomorphic (cellos are tuned in all-fifths). In other words, any combination of musical intervals has the same shape on the keyboard wherever it occurs. This makes scales and chords intuitive to play and facilitates transposition.
@@ -33,7 +33,7 @@ In order to display the red bars whenever you play a note, a bar class was neede
 - turning a QWERTY keyboard into a virtual cello
 
 # Video Demonstration
-[![YouTube Video Demonstration](http://img.youtube.com/vi/2awARrWVBFc/0.jpg)](http://www.youtube.com/watch?v=2awARrWVBFc)
+[![YouTube](http://img.youtube.com/vi/_49EwxMVPJM/0.jpg)](http://www.youtube.com/watch?v=_49EwxMVPJM)
 
 ## Music Used
 - Johann Sebastian Bach - Cello Suite No. 4 in E-flat major, BWV 1010: V. Bourrée II
